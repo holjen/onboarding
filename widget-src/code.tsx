@@ -69,7 +69,7 @@ function Notepad() {
       padding={10}
     >
       <Text fontSize={12} width={80} horizontalAlignText={'center'}>
-      {doneOptions.find(f => f.option === amIDone)?.label || "Unknown"}
+      {doneOptions.find(f => f.option === amIDone)?.label || "Error"}
       </Text>
     </AutoLayout>
     </AutoLayout>
