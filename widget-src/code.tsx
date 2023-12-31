@@ -4,22 +4,32 @@ const { Input, AutoLayout, useSyncedState, usePropertyMenu , Text} = widget;
 function Notepad() {
   const [text, setText] = useSyncedState("text", "Hello\nWidgets")
   const [amIDone, setDone] = useSyncedState("done", "Completed")
-  const [fruit, setFruit] = useSyncedState("fruit", "mango")
-  //const doneOptions = [{option: "mango", label: "Mango"}, { option: "done", label: "Completed" }, { option: "maybe", label: "In progress" }, { option: "not yet", label: "Incomplete" }]
+  const [who, setWho] = useSyncedState("who", "Unknown")
   const doneOptions = [{ option: "done", label: "Completed" }, { option: "maybe", label: "In progress" }, { option: "not yet", label: "Incomplete" }]
+  const whoOptions = [{option: "abby", label: "Abby"}, {option: "Bob", label: "Bob"}]
   usePropertyMenu(
     [
       {
         itemType: 'dropdown',
-        propertyName: 'help',
-        tooltip: 'Fruit selector',
+        propertyName: 'doneNess',
+        tooltip: 'Done selector',
         selectedOption: amIDone,
         options: doneOptions,
       },
+      {
+        itemType: 'dropdown',
+        propertyName: 'whoDidIt',
+        tooltip: 'Who selector',
+        selectedOption: who,
+        options: whoOptions,
+      },
     ],
     ({propertyName, propertyValue}) => {
-      if (propertyName === "help") {
+      if (propertyName === "doneNess") {
         setDone(propertyValue)
+      }
+      if (propertyName === "whoDidIt") {
+        setWho(propertyValue)
       }
     },
   )
@@ -68,8 +78,16 @@ function Notepad() {
       verticalAlignItems={'center'}
       padding={10}
     >
-      <Text fontSize={12} width={80} horizontalAlignText={'center'}>
+      <Text fontSize={12} width={70} horizontalAlignText={'center'}>
       {doneOptions.find(f => f.option === amIDone)?.label || "Error"}
+      </Text>
+    </AutoLayout>
+    <AutoLayout
+      verticalAlignItems={'center'}
+      padding={10}
+    >
+      <Text fontSize={12} width={70/2} horizontalAlignText={'center'}>
+      {whoOptions.find(f => f.option === who)?.label || "Error"}
       </Text>
     </AutoLayout>
     </AutoLayout>
